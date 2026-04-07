@@ -20,58 +20,70 @@
 
         .container {
             width: 90%;
-            max-width: 400px;
+            max-width: 500px;
         }
 
         img {
-            width: 250px;
-            height: 250px;
+            width: 260px;
+            height: 260px;
             object-fit: contain;
             border-radius: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         h1 {
             color: #d63384;
-            font-size: 2rem;
-            margin-bottom: 30px;
+            font-size: 2.2rem;
+            margin-bottom: 35px;
         }
 
         .buttons {
-            position: relative;
             display: flex;
-            gap: 40px; /* مسافة كافية بين الأزرار */
             justify-content: center;
             align-items: center;
-            height: 80px;
+            gap: 100px; /* مسافة كبيرة وواضحة بين الزرين */
+            position: relative;
+            min-height: 100px;
         }
 
         .btn {
-            padding: 12px 35px;
-            font-size: 1.2rem;
+            padding: 15px 40px;
+            font-size: 1.3rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
             color: white;
             background-color: #ff4d6d;
-            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
-            transition: 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+            transition: background-color 0.3s, transform 0.1s ease;
             text-decoration: none;
             display: inline-block;
         }
 
+        .btn:active {
+            transform: scale(0.95);
+        }
+
         .no-btn {
-            position: absolute;
-            left: 58%; /* تعديل مكان البداية لعدم الالتصاق */
+            transition: all 0.2s ease;
+            z-index: 5;
+        }
+
+        .yes-btn {
+            z-index: 10;
         }
 
         /* تنسيق زر الواتساب */
         .wa-btn {
-            background-color: #25D366; /* لون الواتساب الأخضر */
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
-            font-size: 1rem;
+            background-color: #25D366;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .wa-btn:hover {
+            background-color: #1ebe57;
         }
 
         .hidden {
@@ -79,9 +91,9 @@
         }
 
         @media (max-width: 600px) {
-            h1 { font-size: 1.6rem; }
+            h1 { font-size: 1.8rem; }
             img { width: 220px; height: 220px; }
-            .buttons { gap: 30px; }
+            .buttons { gap: 80px; } /* مسافة مناسبة للموبايل مع الحفاظ على التباعد */
         }
     </style>
 </head>
@@ -98,30 +110,39 @@
         </div>
 
         <div id="result-section" class="hidden">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3NueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/KztT2c4u8mYYUiMKdJ/giphy.gif" alt="Cute Love">
+            <img src="https://media.giphy.com/media/Vz58J8shFW6BvqnYTm/giphy.gif" alt="Cute Cats Hug">
             <h1>I knew it! ❤😏</h1>
             
             <a href="https://wa.me/201124680211?text=انا%20بحبك%20ومقدرش%20اعيش%20من%20غيرك" target="_blank" class="btn wa-btn">
-                اضغط هنا قولي الكلمتين دول 😉
+                اضغط هنا بقا ♥🙃
+             
             </a>
         </div>
     </div>
 
     <script>
+        // وظيفة هروب زر No
         function moveButton() {
             const btn = document.getElementById('no-btn');
-            const padding = 50;
+            
+            // تحويل الـ position لـ fixed عند أول محاولة لجعله يطير في الشاشة
+            btn.style.position = "fixed";
+            
+            const padding = 60; // هامش أمان عن الحواف
             const x = Math.random() * (window.innerWidth - btn.offsetWidth - padding);
             const y = Math.random() * (window.innerHeight - btn.offsetHeight - padding);
             
-            btn.style.position = "fixed";
             btn.style.left = x + "px";
             btn.style.top = y + "px";
         }
 
+        // وظيفة الضغط على Yes
         function sayYes() {
+            // إخفاء السؤال وإظهار النتيجة والواتساب
             document.getElementById('question-section').classList.add('hidden');
             document.getElementById('result-section').classList.remove('hidden');
+            
+            // تغيير لون الخلفية قليلاً للاحتفال
             document.body.style.backgroundColor = "#ffdeeb";
         }
     </script>
